@@ -1,6 +1,7 @@
+import './Btn.scss'
 export default function Btn (Btn) {
     return (
-        <button>
+        <button className="btn">
             <p>{Btn.btnText}</p>
         </button>
     )
