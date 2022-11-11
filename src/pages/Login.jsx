@@ -1,13 +1,11 @@
 import Btn from "../Components/Btn/Btn";
 import '../styles/LoginForm.scss'
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 export default function Login () {
 
-    const [username, setUsername] = useState()
-    
-    
+
+
     return (
     <div>
         <form className='login-form'>

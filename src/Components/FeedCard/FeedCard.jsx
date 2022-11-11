@@ -1,14 +1,18 @@
-export default function FeedCard (props){
-    <div className="feed-card">
-        <div className="feed-card__left">
-            <img src={props.img} alt="friend img" />
-        </div>
-        <div className="feed-card__top">
-            <p>{props.name}</p>
-            <p>{props.time}</p>
-        </div>
-        <div className="feed-card__main">
-            <p>{props.post}</p>
-        </div>
+import React from 'react'
+import './FeedCard.scss'
+export default function FeedCard(props) {
+  return ( 
+<section className='feed'>
+    <div className='feed__top'>
+        <p>{props.name}</p>
+        <p>{props.time}</p>
     </div>
+    <div className='feed__main'>
+        <p>{props.post}</p>
+    </div>
+
+
+</section>
+  )
 }
+

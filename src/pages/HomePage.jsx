@@ -1,11 +1,13 @@
-import FeedCard from "../Components/FeedCard/FeedCard";
 import Nav from "../Components/Navigation/Nav";
-
+import FeedCard from "../Components/FeedCard/FeedCard.jsx"
+import '../styles/HomePage.scss'
 export default function HomePage () {
     return(
         <section>
-            <p>this is where you can see your feed of friends</p>
-            <FeedCard name="Jason" time="January" post="hello world"/>
+            <div className="home-page">
+            <p>Welcome Back (User)</p>
+            <FeedCard name='Jason' time='Jan 01 2011' post='Hello world this is a test! Hopefully this works'/>
+            </div>
             <Nav/>
         </section>
     )

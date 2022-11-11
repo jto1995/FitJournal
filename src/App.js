@@ -10,6 +10,7 @@ import SiteHome from "./pages/SiteHome";
 import Login from "./pages/Login";
 import ForgotLogin from "./pages/ForgotLogin";
 import SignUp from "./pages/SignUp";
+import { LoginContext } from "./context/LoginContext";
 function App() {
 
   return (

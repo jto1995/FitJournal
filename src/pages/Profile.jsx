@@ -10,7 +10,7 @@ export default function Profile (userInfo) {
         <img className="profile__pic"src={ProfilePic} alt=""/>
         </div>
         <div>
-        <p>{userInfo.name}User's Name</p>
+        <p>{userInfo.name}Mohan Muruge</p>
         </div>
     </div> 
     <nav>
