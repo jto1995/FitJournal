@@ -7,8 +7,13 @@
         display: flex;
         flex-direction: column;
         width: 100%;
+        margin-bottom: 2rem;
     }
 
 .food-choice {
     margin: .2rem 0 .5rem;
+}
+
+.exercise-log {
+    margin-bottom: 2rem;
 }

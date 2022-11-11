@@ -15,9 +15,10 @@ export default function Profile (userInfo) {
     </div> 
     <nav>
         <ul className="profile-nav">
-            <li className="profile-nav__items"><Link>Graphs</Link></li>
-            <li className="profile-nav__items"><Link>Graphs</Link></li>
-            <li className="profile-nav__items"><Link>Graphs</Link></li>
+            {/* to filter what you're looking for */}
+            <li className="profile-nav__items"><Link>Nutrition</Link></li>
+            <li className="profile-nav__items"><Link>Workout</Link></li>
+            <li className="profile-nav__items"><Link>Post</Link></li>
             {/* include some icons with these buttons */}
         </ul>
     </nav>

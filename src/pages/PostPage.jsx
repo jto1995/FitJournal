@@ -25,12 +25,22 @@ export default function PostPage() {
                 <div className="exercise-log">
                     <PostForm option1="Upper body" option2="Lower body" option3="Cardio & Abs"/>
                     <div>
-
+                        <form className="log-form">
+                            <label htmlFor="">Exercise</label>
+                            <input className="food-choice" type="text" placeholder="Exercise"/>
+                            <label htmlFor="">Exercise</label>
+                            <input className="food-choice" type="text" placeholder="Exercise"/>
+                            <label htmlFor="">Exercise</label>
+                            <input className="food-choice" type="text" placeholder="Exercise"/>
+                            <Btn btnText="Submit Exercise Log"/>
+                        </form>
                     </div>
                 </div>
 
             </div>
-
+<div>
+        
+</div>
         <Nav/>
         </div>
     )
