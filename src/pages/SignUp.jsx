@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Btn from "../Components/Btn/Btn";
-import '../styles/SignUp.scss'
 export default function SignUp(){
 
     const [email, setEmail] = useState("");
@@ -74,25 +73,27 @@ export default function SignUp(){
           };
 
     return (
-        <div className="sign">
-            <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className="signup">
-                <label> Email:</label>
-                <input type="email" />
+        <div className="bg-sky-50 h-screen p-4">
+            <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className="flex flex-col">
+                <label className="pb-1"> Email:</label>
+                <input className="mb-2 h-7 pl-2" type="email" placeholder="Email" />
 
-                <label>Name: </label>
-                <input type="text" value={name} onChange={handleChangeName}></input>
+                <label className="pb-1">Name: </label>
+                <input className="mb-2 h-7 pl-2" type="text" value={name} onChange={handleChangeName} placeholder='Name'></input>
 
-                <label>Password:</label>
-                <input type="password" value={password} onChange={handleChangePassword}/>
+                <label className="pb-1">Password:</label>
+                <input className="mb-2 h-7 pl-2" type="password" value={password} onChange={handleChangePassword} placeholder='Password'/>
 
-                <label>Confirm Password: </label>
-                <input type="password" className="signup__confirm" value={confirmPassword} onChange={handleChangeConfirmPassword}/>
-
+                <label className="pb-1">Confirm Password: </label>
+                <input className="mb-2 h-7 pl-2" type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} placeholder='Confirm Password'/>
+                
+                <div className="mt-2 mb-4">
                 {passwordWarning()}
+                </div>
                 <Btn btnText="Submit"/>
             </form>
-            <div>
-            <Link to="/login">Back</Link>
+            <div className="mt-4">
+            <Link className='font-bold'to="/login">Back</Link>
             </div>
         </div>
     )
