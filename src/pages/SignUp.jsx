@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Btn from "../Components/Btn/Btn";
+import Btn from "../Components/Btn";
+import Google from "../assets/Icons/google.png"
 export default function SignUp(){
 
     const [email, setEmail] = useState("");
@@ -36,14 +37,6 @@ export default function SignUp(){
           return false;
         };
 
-        const passwordWarning = () => {
-            if(!isConfirmPasswordValid()) {
-              return <div>Passwords dont' match</div>;
-            } else {
-              return '';
-            }
-          }
-
           const isFormValid = () => {
             if(!email) {
               return false;
@@ -73,27 +66,41 @@ export default function SignUp(){
           };
 
     return (
-        <div className="bg-sky-50 h-screen p-4">
-            <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className="flex flex-col">
-                <label className="pb-1"> Email:</label>
-                <input className="mb-2 h-7 pl-2" type="email" placeholder="Email" />
+        <div className="bg-gradient-to-r from-green-100 to-sky-300 h-screen p-4">
+            <p className="flex justify-center font-bold text-3xl lg:mt-4 mb-8">Sign Up</p>
+            <div className="flex justify-center">
+            <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className='flex flex-col bg-stone-100 p-8 border-2 m-6 rounded-xl shadow-md w-80'>
+                <label className="pb-1 font-bold italic"> Email Address:</label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="email" placeholder="Email" />
 
-                <label className="pb-1">Name: </label>
-                <input className="mb-2 h-7 pl-2" type="text" value={name} onChange={handleChangeName} placeholder='Name'></input>
+                <label className="pb-1 font-bold italic">Full Name: </label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="text" value={name} onChange={handleChangeName} placeholder='Name'></input>
 
-                <label className="pb-1">Password:</label>
-                <input className="mb-2 h-7 pl-2" type="password" value={password} onChange={handleChangePassword} placeholder='Password'/>
+                <label className="pb-1 font-bold italic">Password:</label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="password" value={password} onChange={handleChangePassword} placeholder='Password'/>
 
-                <label className="pb-1">Confirm Password: </label>
-                <input className="mb-2 h-7 pl-2" type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} placeholder='Confirm Password'/>
-                
+                <label className="pb-1 font-bold italic">Confirm Password: </label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} placeholder='Confirm Password'/>
+
                 <div className="mt-2 mb-4">
-                {passwordWarning()}
+                {password === confirmPassword ? <p></p> : <p>Password don't match</p>}
                 </div>
                 <Btn btnText="Submit"/>
+                <p className="flex justify-center mt-6">----------or-----------</p>
+
+                <div className="flex justify-center mt-6 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
+                    <img className="w-6" src={Google} alt="" />
+                    <p>Sign up with Google</p>
+                </div>
+
+                <div className="flex justify-center mt-6 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
+                    <img className="w-6" src={Google} alt="" />
+                    <p>Sign up with Facebook</p>
+                </div>
             </form>
+            </div>
             <div className="mt-4">
-            <Link className='font-bold'to="/login">Back</Link>
+            <Link className='font-bold flex justify-center'to="/login">Back</Link>
             </div>
         </div>
     )

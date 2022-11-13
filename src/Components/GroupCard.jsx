@@ -1,5 +1,4 @@
-import Btn from "../Btn/Btn";
-import './GroupCard.scss'
+import Btn from "./Btn";
 export default function GroupCard (){
     return (
         <div className="group-card">

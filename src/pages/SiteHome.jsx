@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import Btn from "../Components/Btn/Btn";
+import Btn from "../Components/Btn";
 export default function SiteHome (){
     return (
-        <div className='bg-sky-50 px-4 h-screen'>        
+        <div className='bg-gradient-to-r from-green-100 to-sky-300 px-4 h-screen'>        
             <div className="flex justify-between pt-4 pb-2">
                 <Link to="/signup"><Btn btnText='Sign Up'/></Link>
                 <Link to='/login'><Btn btnText='Login'/></Link>
