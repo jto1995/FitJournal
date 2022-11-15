@@ -1,5 +1,4 @@
 import React from 'react'
-import TimeAgo from 'javascript-time-ago'
 export default function FeedCard(props) {
   return ( 
 <section className='flex flex-col px-2 bg-stone-50'>

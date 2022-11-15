@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Btn from "../Components/Btn";
 import Google from "../assets/Icons/google.png"
+import Facebook from "../assets/Icons/facebook.png"
+import SiteHeader from '../Components/SiteHeader'
+
 export default function SignUp(){
 
     const [email, setEmail] = useState("");
@@ -66,8 +69,10 @@ export default function SignUp(){
           };
 
     return (
-        <div className="bg-gradient-to-r from-green-100 to-sky-300 h-screen p-4">
-            <p className="flex justify-center font-bold text-3xl lg:mt-4 mb-8">Sign Up</p>
+      <div>
+        <SiteHeader />
+        <div className="bg-gradient-to-r from-green-100 to-sky-300 h-screen ">
+            <p className="flex justify-center font-bold text-3xl pt-4 lg:mb-2">Sign Up</p>
             <div className="flex justify-center">
             <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className='flex flex-col bg-stone-100 p-8 border-2 m-6 rounded-xl shadow-md w-80'>
                 <label className="pb-1 font-bold italic"> Email Address:</label>
@@ -86,22 +91,24 @@ export default function SignUp(){
                 {password === confirmPassword ? <p></p> : <p>Password don't match</p>}
                 </div>
                 <Btn btnText="Submit"/>
-                <p className="flex justify-center mt-6">----------or-----------</p>
+                <p className="flex justify-center mt-3">----------or-----------</p>
 
-                <div className="flex justify-center mt-6 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
+                <div className="flex justify-center mt-4 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
                     <img className="w-6" src={Google} alt="" />
                     <p>Sign up with Google</p>
                 </div>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
-                <div className="flex justify-center mt-6 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
-                    <img className="w-6" src={Google} alt="" />
+                <div className="flex justify-center mt-4 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
+                    <img className="w-6" src={Facebook} alt="" />
                     <p>Sign up with Facebook</p>
                 </div>
             </form>
             </div>
-            <div className="mt-4">
+            <div className="my-4">
             <Link className='font-bold flex justify-center'to="/login">Back</Link>
             </div>
         </div>
+      </div>
     )
 }

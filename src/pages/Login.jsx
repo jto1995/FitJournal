@@ -1,7 +1,8 @@
 import Btn from "../Components/Btn";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Google from '../assets/Icons/google.png'
+import SiteHeader from '../Components/SiteHeader'
+
 
 export default function Login () {
     const navigate = useNavigate();
@@ -34,6 +35,8 @@ export default function Login () {
     }
 };
     return (
+        <div>
+            <SiteHeader/>
         <div className="bg-gradient-to-r from-green-100 to-sky-300 h-screen">
             <div className="flex flex-col justify-center">
             <h2 className="text-xl flex justify-center mt-4 font-bold">Sign Into Your Account</h2>
@@ -50,5 +53,6 @@ export default function Login () {
             </form>
             </div>
         </div>
-        )
-    }
+     </div>
+    )
+}

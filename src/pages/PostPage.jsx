@@ -2,6 +2,7 @@ import { useState } from "react";
 import Btn from "../Components/Btn";
 import Nav from "../Components/MobileNav";
 import PostForm from "../Components/PostForm";
+import UserHeader from "../Components/UserHeader";
 export default function PostPage() {
 
     const [foodInput, setFoodInput] = useState([
@@ -25,6 +26,7 @@ export default function PostPage() {
 
     return (
         <div>
+            <UserHeader/>
             <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4 h-screen">
                 <PostForm option1="Options" option2="Exercise" option3="Food"/>
                 <div>
@@ -37,6 +39,7 @@ export default function PostPage() {
                                     <div className="flex flex-col"key={index}>
                                     <label htmlFor="entry">Food Item</label>
                                     <input
+                                        className='mb-6 py-1 pl-2 italic rounded-xl'
                                         name='food Entry'
                                         placeholder='Food Item'
                                         value={input.food}
@@ -45,9 +48,14 @@ export default function PostPage() {
                                     </div>
                                 )
                                 }, )}
-                            <div className="flex justify-center my-5">
-                                <Btn btnText="Submit Food Entry"/>
-                            </div>
+                            <div className="flex flex-col md:flex-row justify-evenly">
+                                <div className="flex flex-col justify-center justify-between my-5">
+                                    <Btn btnText="Submit Food Entry"/>
+                                </div>
+                                <div className="flex flex-col mb-5 md:mt-5" >
+                                    <Btn btnText="View your daily Nutrition"/>
+                                </div>
+                            </div>          
                         </form>
                     </div>
                 </div>
@@ -59,21 +67,21 @@ export default function PostPage() {
                                 return (
                                     <div className="flex flex-col mb-6 "key={index}>
                                         <input
-                                            className="mt-2"
+                                            className='mb-6 py-1 pl-2 italic rounded-xl'
                                             name='exercise'
                                             placeholder='Exercise'
                                             value={input.exercise}
                                             onChange={event => handleExerciseChange(index, event)}
                                         />
                                         <input
-                                            className="mt-2"
+                                            className='mb-6 py-1 pl-2 italic rounded-xl'
                                             name='sets'
                                             placeholder='Sets'
                                             value={input.sets}
                                             onChange={event => handleExerciseChange(index, event)}
                                         />
                                         <input
-                                            className="mt-2"
+                                            className='mb-6 py-1 pl-2 italic rounded-xl'
                                             name='reps'
                                             placeholder='Reps'
                                             value={input.reps}
@@ -86,7 +94,7 @@ export default function PostPage() {
                                     </div>
                                 )
                                 }, )}
-                            <div className="flex justify-center">
+                            <div className="flex justify-center ">
                                 <Btn btnText="Submit Exercise Log"/>
                             </div>
                         </form>

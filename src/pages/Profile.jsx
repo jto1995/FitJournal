@@ -1,11 +1,14 @@
 import Nav from "../Components/MobileNav";
 import ProfilePic from '../assets/images/pic.jpg'
 import { Link } from "react-router-dom";
+import UserHeader from "../Components/UserHeader";
 
 export default function Profile (userInfo) {
     return (
+<div>
+    <UserHeader />
     <section className='bg-gradient-to-r from-green-100 to-sky-300 h-screen'>
-    <div className="flex flex-col justify-center pt-4 mb-6 ">
+    <div className="flex flex-col justify-center align-center pt-4 mb-6 ml-50">
         <img className='rounded-full h-20 w-20' src={ProfilePic} alt=""/>
         <p>{userInfo.name}Mohan Muruge</p>
     </div> 
@@ -18,12 +21,17 @@ export default function Profile (userInfo) {
             {/* include some icons with these buttons */}
         </ul>
     </nav>
-    <div>
-        <p>Date</p>
+    <div className="flex flex-col p-6 bg-slate-100 m-6 rounded-xl">
+        <div className="flex justify-between mx-4 mb-2">
+            <p>Date</p>
+            <button>🗑️</button>
+        </div>
         <p>Your previous posts!! Need to grab information from server/api to be worked on later!!! Will make a card component for these cards so am able to map all info into those cards and make this page of code shorter</p>
     </div>
         <Nav/>
 
 
-    </section>)
+    </section>
+</div>
+    )
 }
