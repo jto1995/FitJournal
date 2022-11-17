@@ -4,9 +4,45 @@ import Btn from "../Components/Btn";
 import Nav from "../Components/MobileNav";
 import PostForm from "../Components/PostForm";
 import UserHeader from "../Components/UserHeader";
-import { Line } from "react-chartjs-2";
+import LineChart from "../charts/LineChart";
+import { UserData, UserNutrition } from "../data/Data";
+import PolarChart from "../charts/PolarChart";
 
 export default function PostPage() {
+
+  const [userNutrition, setUserNutrtion] = useState({
+    labels: UserNutrition.map((data) => data.type),
+    datasets: [
+      {
+        label:"Nutrtion",
+        data: UserNutrition.map((data) => data.amount),
+        backgroundColor: [
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor:"black"
+      }
+    ]
+  })
+  const [userData, setUserData] = useState({
+    labels: UserData.map((data) => data.month),
+    datasets: [
+      {
+        label: "Weight",
+        data: UserData.map((data) => data.weight),
+        backgroundColor: [
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
   const [foodInput, setFoodInput] = useState([{ food: "" }]);
   const [exerciseInput, setExerciseInput] = useState([
     { sets: "", reps: "", exercise: "" },
@@ -44,14 +80,15 @@ export default function PostPage() {
   return (
     <div>
       <UserHeader />
-      <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4 h-screen">
-        <PostForm option1="Weight" option2="Exercise" option3="Food" />
-        <div>
-          <h2>Weight Log</h2>
-          <form onSubmit={handleWeightSubmit}>
+      <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4">
+        <PostForm option1="Exercise" option2="Food" option3="Weight"/>
+        <div className="flex flex-col justify-center justify-evenly sm:flex-row">
+          <form className="flex flex-col" onSubmit={handleWeightSubmit}>
+          <h2 className="mb-4 font-bold text-2xl">Weight Log</h2>
             {weightInput.map((input, index) => {
               return (
                 <input
+                  className="mb-6 py-1 pl-2 italic rounded-xl"
                   type="number"
                   placeholder="Weight in lbs"
                   value={input.weight}
@@ -61,9 +98,13 @@ export default function PostPage() {
             })}
             <Btn btnText="Submit" />
           </form>
+          <div className="my-4 sm:w-2/3">
+          <LineChart chartData={userData}/>
+          </div>
           {/* Line chart here for weight gain/loss */}
         </div>
-        <div>
+        <div className="flex flex-col md:flex-row ml-6 ">
+          <div className="flex flex-col md:w-1/3">
           <h2 className="mb-2 font-bold">Food Log</h2>
           <p className="italic mb-2">
             Here you're able to log what you ate today and it will submit to our
@@ -71,7 +112,6 @@ export default function PostPage() {
             server for your to keep track of! You will be able to see if you're
             hitting your macros each day!
           </p>
-          <div>
             <form onSubmit={handleFoodSubmit} className="flex flex-col">
               {foodInput.map((input, index) => {
                 return (
@@ -86,17 +126,20 @@ export default function PostPage() {
                     />
                   </div>
                 );
-              })}
-              <div className="flex flex-col md:flex-row justify-evenly">
+              })
+            }
+              <div className="flex flex-col justify-evenly">
                 <div className="flex flex-col justify-center justify-between my-5">
                   <Btn btnText="Submit Food Entry" />
                 </div>
-                <div className="flex flex-col mb-5 md:mt-5">
+                <div className="flex flex-col mb-5">
                   <Btn btnText="View your daily Nutrition" />
                 </div>
               </div>
             </form>
-            {/* chart here for daily nutrition */}
+          </div>
+          <div className="md:w-3/5 ml-10">
+            <PolarChart chartData={userNutrition}/>
           </div>
         </div>
         <div className="flex flex-col justify-center">
@@ -140,7 +183,7 @@ export default function PostPage() {
                   </div>
                 );
               })}
-              <div className="flex justify-center ">
+              <div className="flex justify-center mb-20 sm:mb-4 ">
                 <Btn btnText="Submit Exercise Log" />
               </div>
             </form>

@@ -71,7 +71,7 @@ export default function SignUp(){
     return (
       <div>
         <SiteHeader />
-        <div className="bg-gradient-to-r from-green-100 to-sky-300 h-screen ">
+        <div className="bg-gradient-to-r from-green-100 to-sky-300 ">
             <p className="flex justify-center font-bold text-3xl pt-4 lg:mb-2">Sign Up</p>
             <div className="flex justify-center">
             <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className='flex flex-col bg-stone-100 p-8 border-2 m-6 rounded-xl shadow-md w-80'>

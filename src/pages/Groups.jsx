@@ -3,6 +3,7 @@ import Nav from "../Components/MobileNav";
 import UserHeader from "../Components/UserHeader";
 
 export default function Groups () {
+
     return (
     <section>
         <UserHeader/>

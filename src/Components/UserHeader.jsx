@@ -8,7 +8,7 @@ import Logout from "../assets/Icons/power.png";
 
 export default function UserHeader() {
   return (
-    <div className="flex justify-between p-2 text-2xl font-bold bg-sky-500 sticky w-full md:p-3 lg:p-4 ">
+    <div className="flex justify-center p-2 text-2xl font-bold bg-sky-500 sticky w-full md:p-3 lg:p-4 sm:justify-between">
       <div className="ml-6">
         <Link to="/feed">Fit Journal 💪</Link>
       </div>
