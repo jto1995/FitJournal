@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Btn from "../Components/Btn/Btn";
-import '../styles/SignUp.scss'
+import Btn from "../Components/Btn";
+import Google from "../assets/Icons/google.png"
+import Facebook from "../assets/Icons/facebook.png"
+import SiteHeader from '../Components/SiteHeader'
+
 export default function SignUp(){
 
     const [email, setEmail] = useState("");
@@ -37,14 +40,6 @@ export default function SignUp(){
           return false;
         };
 
-        const passwordWarning = () => {
-            if(!isConfirmPasswordValid()) {
-              return <div>Passwords dont' match</div>;
-            } else {
-              return '';
-            }
-          }
-
           const isFormValid = () => {
             if(!email) {
               return false;
@@ -74,26 +69,46 @@ export default function SignUp(){
           };
 
     return (
-        <div className="sign">
-            <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className="signup">
-                <label> Email:</label>
-                <input type="email" />
+      <div>
+        <SiteHeader />
+        <div className="bg-gradient-to-r from-green-100 to-sky-300 ">
+            <p className="flex justify-center font-bold text-3xl pt-4 lg:mb-2">Sign Up</p>
+            <div className="flex justify-center">
+            <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className='flex flex-col bg-stone-100 p-8 border-2 m-6 rounded-xl shadow-md w-80'>
+                <label className="pb-1 font-bold italic"> Email Address:</label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="email" placeholder="Email" />
 
-                <label>Name: </label>
-                <input type="text" value={name} onChange={handleChangeName}></input>
+                <label className="pb-1 font-bold italic">Full Name: </label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="text" value={name} onChange={handleChangeName} placeholder='Name'></input>
 
-                <label>Password:</label>
-                <input type="password" value={password} onChange={handleChangePassword}/>
+                <label className="pb-1 font-bold italic">Password:</label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="password" value={password} onChange={handleChangePassword} placeholder='Password'/>
 
-                <label>Confirm Password: </label>
-                <input type="password" className="signup__confirm" value={confirmPassword} onChange={handleChangeConfirmPassword}/>
+                <label className="pb-1 font-bold italic">Confirm Password: </label>
+                <input className="mb-2 py-1 pl-2 italic rounded-xl" type="password" value={confirmPassword} onChange={handleChangeConfirmPassword} placeholder='Confirm Password'/>
 
-                {passwordWarning()}
+                <div className="mt-2 mb-4">
+                {password === confirmPassword ? <p></p> : <p>Password don't match</p>}
+                </div>
                 <Btn btnText="Submit"/>
+                <p className="flex justify-center mt-3">----------or-----------</p>
+
+                <div className="flex justify-center mt-4 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
+                    <img className="w-6" src={Google} alt="" />
+                    <p>Sign up with Google</p>
+                </div>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+                <div className="flex justify-center mt-4 border-2 p-4 rounded-xl justify-between shadow-md bg-slate-100">
+                    <img className="w-6" src={Facebook} alt="" />
+                    <p>Sign up with Facebook</p>
+                </div>
             </form>
-            <div>
-            <Link to="/login">Back</Link>
+            </div>
+            <div className="my-4">
+            <Link className='font-bold flex justify-center'to="/login">Back</Link>
             </div>
         </div>
+      </div>
     )
 }

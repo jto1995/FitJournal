@@ -1,14 +1,17 @@
-import Nav from "../Components/Navigation/Nav";
-import FeedCard from "../Components/FeedCard/FeedCard.jsx"
-import '../styles/HomePage.scss'
+import Nav from "../Components/MobileNav";
+import FeedCard from "../Components/FeedCard.jsx"
+import UserHeader from "../Components/UserHeader";
 export default function HomePage () {
     return(
-        <section>
-            <div className="home-page">
-            <p>Welcome Back (User)</p>
-            <FeedCard name='Jason' time='Jan 01 2011' post='Hello world this is a test! Hopefully this works'/>
-            </div>
-            <Nav/>
-        </section>
+        <div>
+            <UserHeader/>
+            <section>
+                <div className='bg-gradient-to-r from-green-100 to-sky-300 p-4 h-screen'>
+                <p>Welcome Back (User)</p>
+                <FeedCard name='Jason' time='Jan 01 2011' post='Hello world this is a test! Hopefully this works'/>
+                </div>
+                <Nav/>
+            </section>
+        </div>
     )
 }
