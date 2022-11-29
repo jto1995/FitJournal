@@ -1,21 +1,22 @@
-export default function PostForm(props) {
-  const handleSelect = (event) => {};
+
+export default function PostForm(post) {
+  
 
   return (
     <section className="flex justify-center">
-      <p className="mb-2 mr-6">What are you logging?</p>
+      <p className="mb-2 mr-6 font-bold">What are you logging?</p>
       <select
-        className="mb-6 py-1 pl-2 italic rounded-xl"
-        onSelect={handleSelect}
+        onChange={post.change}
+        className="py-1 pl-2 mb-6 italic rounded-xl"
         name="selectList"
         id="selectList"
       >
-        <option value="" disabled selected>
+        <option>
           Options
         </option>
-        <option value="option 1">{props.option1}</option>
-        <option value="option 2">{props.option2}</option>
-        <option value="option 3">{props.option3}</option>
+        <option value="exercise">Exercise Log</option>
+        <option value="food">Food Log</option>
+        <option value="weight">Weight Log</option>
       </select>
     </section>
   );

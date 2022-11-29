@@ -10,7 +10,8 @@ import Login from "./pages/Login";
 import ForgotLogin from "./pages/ForgotLogin";
 import SignUp from "./pages/SignUp";
 import { LoginContext } from "./context/LoginContext";
-function App() {
+
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -26,8 +27,6 @@ function App() {
         <Route path="/signup" element={<SignUp />}>
           Sign Up
         </Route>
-        {/* </Routes>
-      <Routes> */}
         <Route path="/feed" element={<HomePage />}>
           Landing Page
         </Route>
@@ -50,5 +49,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
