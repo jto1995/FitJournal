@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom"
-import Nav from "./MobileNav"
+import React from "react";
 
-export default function Header () {
-    return (
-        <header className="sticky flex justify-center w-full p-2 text-2xl font-bold bg-sky-600 md:p-3 lg:p-4">
-            <h1><Link to='/'>Fit Journal 💪</Link></h1>
-            
-        </header>
-    )
+export default function SiteHeader() {
+  return (
+    <div className="sticky flex justify-center w-full p-2 text-2xl font-bold bg-sky-700 md:p-3">
+      <div className="ml-6">
+       Fit Journal 💪
+      </div>
+    </div>
+  );
 }

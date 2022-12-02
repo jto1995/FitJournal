@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 import Btn from "../Components/Btn";
-import SiteHeader from "../Components/SiteHeader";
 
 export default function ForgotLogin() {
   return (
     <div>
-      <SiteHeader />
       <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 h-screen">
         <Link to="/login" className="mb-4 font-bold">
           Back

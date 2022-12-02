@@ -1,5 +1,5 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./index.css";
 import HomePage from "./pages/HomePage";
 import PostPage from "./pages/PostPage";
@@ -9,16 +9,76 @@ import SiteHome from "./pages/SiteHome";
 import Login from "./pages/Login";
 import ForgotLogin from "./pages/ForgotLogin";
 import SignUp from "./pages/SignUp";
-import { LoginContext } from "./context/LoginContext";
+import AuthProvider, { LoginContext } from "./context/LoginContext";
+import axios from "axios";
+import AuthContext from "./context/authContext";
+import Nav from "./Components/MobileNav";
+import UserHeader from "./Components/SiteHeader";
+
 
 export default function App() {
+
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    const jwtToken = localStorage.getItem('jwt_token');
+    if (jwtToken) {
+      loadProfile(jwtToken)
+    }
+  }, [])
+
+  const loadProfile = (jwtToken) => {
+    axios
+    .get(`http://localhost:8080/user/login`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`
+      },
+    })
+    .then((response) => {
+      setLoggedIn(true);
+      setUser(response.data.user)
+
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+      axios
+        .post(`http://localhost:8080/login`, {
+          email: e.target.email.value,
+          password: e.target.password.value,
+        })
+        .then((response) => {
+          if (response.data.token) {
+            loadProfile(response.data.token);
+            localStorage.setItem("jwt_token", response.data.token);
+          }
+          navigate('/feed')
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+  };
+
+  const handleLogOut = () => {
+    setLoggedIn(false);
+    setUser(null);
+    localStorage.removeItem('jwt_token')
+    navigate('/')
+  }
   return (
-    <BrowserRouter>
+    <>
+    <UserHeader loggedIn={loggedIn}/>
       <Routes>
         <Route path="/" element={<SiteHome />}>
           Site Home
         </Route>
-        <Route path="/login" element={<Login />}>
+        <Route path="/login" element={<Login handleLogin={handleLogin}/>}>
           Login
         </Route>
         <Route path="/login/forgot" element={<ForgotLogin />}>
@@ -27,7 +87,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp />}>
           Sign Up
         </Route>
-        <Route path="/feed" element={<HomePage />}>
+        <Route path="/feed" element={<HomePage logout={handleLogOut} />}>
           Landing Page
         </Route>
         <Route path="/post" element={<PostPage />}>
@@ -46,6 +106,7 @@ export default function App() {
           Groups
         </Route>
       </Routes>
-    </BrowserRouter>
+        <Nav loggedIn={loggedIn} logOut={handleLogOut}/>
+        </>
   );
 }

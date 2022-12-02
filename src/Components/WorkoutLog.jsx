@@ -30,6 +30,9 @@ export default function WorkoutLog() {
     <div>
       <div>
         <form onSubmit={handleExerciseSubmit} className="flex flex-col">
+            <div className="flex justify-center mb-6">
+            <Btn btnText="+" click={() => addFormFields()} />
+            </div>
           {exerciseInput.map((input, index) => {
             return (
               <div className="flex flex-col justify-evenly mb-6 mx-6 sm:mx-20" key={index}>
@@ -71,7 +74,7 @@ export default function WorkoutLog() {
               </div>
             );
           })}
-          <div className="flex justify-center mb-20 sm:mb-4 ">
+          <div className="flex justify-center justify-evenly mb-20 sm:mb-4 ">
             <Btn btnText="Submit Exercise Log" />
           </div>
         </form>

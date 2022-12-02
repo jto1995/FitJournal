@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Btn from "../Components/Btn";
 import Google from "../assets/Icons/google.png"
 import Facebook from "../assets/Icons/facebook.png"
-import SiteHeader from '../Components/SiteHeader'
 
 export default function SignUp(){
 
@@ -70,7 +69,6 @@ export default function SignUp(){
 
     return (
       <div>
-        <SiteHeader />
         <div className="bg-gradient-to-r from-green-100 to-sky-300 ">
             <p className="flex justify-center pt-4 text-3xl font-bold lg:mb-2">Sign Up</p>
             <div className="flex justify-center">

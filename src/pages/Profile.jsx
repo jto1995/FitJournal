@@ -1,12 +1,10 @@
 import Nav from "../Components/MobileNav";
 import ProfilePic from "../assets/images/pic.jpg";
 import { Link } from "react-router-dom";
-import UserHeader from "../Components/UserHeader";
 
 export default function Profile(userInfo) {
   return (
     <div>
-      <UserHeader />
       <section className="bg-gradient-to-r from-green-100 to-sky-300 h-screen">
         <div className="flex flex-col justify-center align-center pt-4 mb-6 ml-50">
           <img className="rounded-full h-20 w-20" src={ProfilePic} alt="" />
@@ -16,10 +14,10 @@ export default function Profile(userInfo) {
           <ul className="flex justify-between my-5 bg-sky-800 lg:justify-evenly">
             {/* to filter what you're looking for */}
             <li className="bg-sky-400 p-3">
-              <Link>Nutrition</Link>
+              <Link>Nutrition History</Link>
             </li>
             <li className="bg-sky-400 p-3">
-              <Link>Workout</Link>
+              <Link>Workout History</Link>
             </li>
             <li className="bg-sky-400 p-3">
               <Link>Friends List</Link>

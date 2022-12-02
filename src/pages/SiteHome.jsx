@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import Btn from "../Components/Btn";
-import SiteHeader from "../Components/SiteHeader";
 export default function SiteHome() {
   return (
     <div>
-      <SiteHeader />
       <div className="bg-gradient-to-r from-green-100 to-sky-300 px-4 h-screen">
         <div className="flex justify-between pt-4 pb-2">
           <Link to="/signup">
