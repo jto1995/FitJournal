@@ -3,9 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import Btn from "../Components/Btn";
 import Google from "../assets/Icons/google.png"
 import Facebook from "../assets/Icons/facebook.png"
+import axios from "axios";
+import Login from "./Login";
+import { useContext } from "react";
+import AuthContext from "../context/authContext";
 
 export default function SignUp(){
-
+    
+    const { login, user } = useContext(AuthContext)
     const [email, setEmail] = useState("");
     const [name, setName] = useState("")
     const [password, setPassword] = useState("");
@@ -55,13 +60,21 @@ export default function SignUp(){
             return true;
           };
 
-          const handleSubmit = (event) => {
-            event.preventDefault();
-        
+          const handleSubmit = (e) => {
+            e.preventDefault();
             if (isFormValid()) {
-
-              alert("Signed up successfully");
-              navigate('/feed')
+              axios
+              .post(`http://localhost:8080/user`, {
+                email: e.target.email.value,
+                name: e.target.name.value,
+                password: e.target.password.value
+              })
+              .then((response) => {
+                if(response.data.token)
+                localStorage.setItem("jwt_token", response.data.token)
+              })
+              login()
+              navigate('/')
             } else {
               alert("Failed to sign up, you have errors in your form");
             }
@@ -74,13 +87,13 @@ export default function SignUp(){
             <div className="flex justify-center">
             <form onSubmit={handleSubmit} value={email} onChange={handleChangeEmail} className='flex flex-col p-8 m-6 border-2 shadow-md bg-stone-100 rounded-xl w-80'>
                 <label className="pb-1 italic font-bold"> Email Address:</label>
-                <input className="py-1 pl-2 mb-2 italic rounded-xl" type="email" placeholder="Email" />
+                <input className="py-1 pl-2 mb-2 italic rounded-xl" id="email" type="email" placeholder="Email" />
 
                 <label className="pb-1 italic font-bold">Full Name: </label>
-                <input className="py-1 pl-2 mb-2 italic rounded-xl" type="text" value={name} onChange={handleChangeName} placeholder='Name'></input>
+                <input className="py-1 pl-2 mb-2 italic rounded-xl" id="name"type="text" value={name} onChange={handleChangeName} placeholder='Name'></input>
 
                 <label className="pb-1 italic font-bold">Password:</label>
-                <input className="py-1 pl-2 mb-2 italic rounded-xl" type="password" value={password} minLength="8" onChange={handleChangePassword} placeholder='Password'/>
+                <input className="py-1 pl-2 mb-2 italic rounded-xl" id="password" type="password" value={password} minLength="8" onChange={handleChangePassword} placeholder='Password'/>
 
                 <label className="pb-1 italic font-bold">Confirm Password: </label>
                 <input className="py-1 pl-2 mb-2 italic rounded-xl" type="password" value={confirmPassword} minLength="8" onChange={handleChangeConfirmPassword} placeholder='Confirm Password'/>
@@ -95,7 +108,7 @@ export default function SignUp(){
                     <img className="w-6" src={Google} alt="" />
                     <p>Sign up with Google</p>
                 </div>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                <div className="g-signin2" data-onsuccess="onSignIn"></div>
 
                 <div className="flex justify-center justify-between p-4 mt-4 border-2 shadow-md rounded-xl bg-slate-100">
                     <img className="w-6" src={Facebook} alt="" />

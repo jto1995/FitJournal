@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Nav from "../Components/MobileNav";
 import PostForm from "../Components/PostForm";
 import WorkoutLog from "../Components/WorkoutLog";
 import FoodLog from "../Components/FoodLog";
@@ -36,7 +35,6 @@ export default function PostPage() {
         {showHide === "food" && <FoodLog />}
         {showHide === "exercise" && <WorkoutLog />}
       </div>
-      <Nav />
     </div>
   );
 }

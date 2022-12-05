@@ -1,4 +1,3 @@
-import Nav from "../Components/MobileNav";
 import ProfilePic from "../assets/images/pic.jpg";
 import { Link } from "react-router-dom";
 
@@ -37,7 +36,6 @@ export default function Profile(userInfo) {
             shorter
           </p>
         </div>
-        <Nav />
       </section>
     </div>
   );

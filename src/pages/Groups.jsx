@@ -1,5 +1,4 @@
 import GroupCard from "../Components/GroupCard";
-import Nav from "../Components/MobileNav";
 
 export default function Groups () {
 
@@ -11,7 +10,6 @@ export default function Groups () {
             </div>
         <GroupCard/>
         </div>
-        <Nav/>
     </section>
     )
 }
