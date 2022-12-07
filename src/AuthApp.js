@@ -7,20 +7,18 @@ import Groups from "./pages/Groups";
 import HomePage from "./pages/HomePage";
 import Nav from "./Components/MobileNav";
 import axios from "axios";
+import PostModal from "./Components/PostModal";
 
 function AuthApp() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleLogOut = (e) => {
     e.preventDefault();
-    localStorage.removeItem("jwt_token");
+    sessionStorage.removeItem("jwt_token");
     logout();
     navigate("/");
   };
-  const getUserInfo = () => {
-    axios
-    .get()
-  }
+ 
 
   return (
     <>
@@ -43,6 +41,8 @@ function AuthApp() {
         <Route path="/groups/:groupsId" element={<Groups />}>
           Groups
         </Route>
+        <Route path="*" element={<HomePage/>}></Route>
+        <Route path="/test" element={<PostModal/>}></Route>
       </Routes>
       <Nav logout={handleLogOut} />
     </>

@@ -76,6 +76,7 @@ export default function WorkoutLog() {
           })}
           <div className="flex justify-center justify-evenly mb-20 sm:mb-4 ">
             <Btn btnText="Submit Exercise Log" />
+            <Btn btnText="Exercise Log History"/>
           </div>
         </form>
       </div>

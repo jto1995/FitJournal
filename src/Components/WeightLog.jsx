@@ -1,36 +1,67 @@
 import React, { useState } from "react";
 import Btn from "./Btn";
-import { UserData } from "../data/Data";
 import LineChart from "../charts/LineChart";
+import axios from "axios";
+import { useEffect } from "react";
+import { data } from "autoprefixer";
 
 export default function WeightLog() {
-  const [userData, setUserData] = useState({
-    labels: UserData.map((data) => data.month),
-    datasets: [
-      {
-        label: "Weight",
-        data: UserData.map((data) => data.weight),
-        backgroundColor: ["#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0"],
-        borderColor: "black",
-        borderWidth: 2,
-      },
-    ],
-  });
+  const [userData, setUserData] = useState();
   const [weightInput, setWeightInput] = useState([{ weight: "" }]);
 
-  const handleWeightChange = (index, e) => {
-    let data = [weightInput];
-    data[index][e.target.weight] = e.target.value;
-    setWeightInput(data);
+  function formatDate(value) {
+    const length = 10;
+    const shortString = value.substring(0, length);
+    return shortString;
+  }
+
+  const handleUserData = (chartData) =>
+    setUserData({
+      labels: chartData
+        .sort((a, b) => b.value - a.value)
+        ?.map((data) => formatDate(data.created_at)),
+      datasets: [
+        {
+          label: "Weight",
+          data: chartData?.map((data) => data.weight),
+          backgroundColor: ["#ecf0f1", "#50AF95", "#f3ba2f", "#2a71d0"],
+          borderColor: "black",
+          borderWidth: 2,
+        },
+      ],
+    });
+  const getData = () => {
+    const jwtToken = sessionStorage.getItem("jwt_token");
+    axios
+      .get(`http://localhost:8080/user/weight/`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
+      .then((response) => {
+        handleUserData(response.data);
+      });
   };
 
+  useEffect(() => {
+    getData();
+  }, );
+
+
   const handleWeightSubmit = (e) => {
+    const jwtToken = sessionStorage.getItem("jwt_token");
     e.preventDefault();
     const weightPost = {
-      weight: e.target.value,
+      weight: e.target.weight.value,
     };
-    // axios.post
-    // .then
+    console.log(weightPost);
+    axios
+      .post(`http://localhost:8080/user/weight/`, weightPost, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
+      .then(getData());
   };
 
   return (
@@ -38,22 +69,21 @@ export default function WeightLog() {
       <div className="sm:flex">
         <form className="flex flex-col sm:" onSubmit={handleWeightSubmit}>
           <h2 className="mb-4 text-2xl font-bold">Weight Log</h2>
-          {weightInput.map((input, index) => {
+          {weightInput?.map((input, index) => {
             return (
               <input
                 className="py-1 pl-2 mb-6 italic rounded-xl"
                 type="number"
                 key={input.weight}
+                name="weight"
                 placeholder="Weight in lbs"
-                value={input.weight}
-                onChange={(e) => handleWeightChange(index, e)}
               />
             );
           })}
           <Btn btnText="Submit" />
         </form>
         <div className="my-4 sm:w-2/3">
-          <LineChart chartData={userData} />
+          {userData !== undefined ? <LineChart chartData={userData} /> : null}
         </div>
       </div>
     </div>

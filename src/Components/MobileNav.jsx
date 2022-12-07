@@ -7,7 +7,7 @@ import Logout from "../assets/Icons/power.png";
 export default function Nav(logout) {
   return (
     <nav>
-      <ul className="flex justify-between bg-sky-500 fixed bottom-0 w-full px-4 py-2 sm:hidden">
+      <ul className="flex justify-between bg-sky-500 fixed bottom-0 w-full px-4 py-2">
         <li>
           <Link to="/">
             <img className="w-10" src={FeedIcon} alt="" />

@@ -4,13 +4,9 @@ import Btn from "../Components/Btn";
 import Google from "../assets/Icons/google.png"
 import Facebook from "../assets/Icons/facebook.png"
 import axios from "axios";
-import Login from "./Login";
-import { useContext } from "react";
-import AuthContext from "../context/authContext";
 
 export default function SignUp(){
     
-    const { login, user } = useContext(AuthContext)
     const [email, setEmail] = useState("");
     const [name, setName] = useState("")
     const [password, setPassword] = useState("");
@@ -69,12 +65,7 @@ export default function SignUp(){
                 name: e.target.name.value,
                 password: e.target.password.value
               })
-              .then((response) => {
-                if(response.data.token)
-                localStorage.setItem("jwt_token", response.data.token)
-              })
-              login()
-              navigate('/')
+              navigate('/login')
             } else {
               alert("Failed to sign up, you have errors in your form");
             }
