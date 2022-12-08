@@ -4,21 +4,29 @@ import axios from "axios";
 import Btn from "../Components/Btn.jsx";
 import { useState } from "react";
 import { useEffect } from "react";
+import PostModal from "../Components/PostModal.jsx";
 
 export default function HomePage(user) {
   
   const [posts, setPosts] = useState();
+  const [openModal, setOpenModal] = useState(false)
 
   const getData = () => {
     axios.get("http://localhost:8080/posts")
     .then((response) => {
       setPosts(response.data)
-      console.log(response.data)
     })
   };
   useEffect(() => {
     getData();
   }, []);
+
+  const handleModal = () => {
+    setOpenModal(true)
+  }
+  const closeModal = () => {
+    setOpenModal(false)
+  }
 
   function formatDate(value) {
     const length = 10;
@@ -33,7 +41,7 @@ export default function HomePage(user) {
           <h1 className="text-center text-2xl font-bold py-4">
             Community Feed
           </h1>
-          <Btn btnText="New Post" class="mb-4 items-center" />
+          <Btn btnText="New Post" class="mb-4 items-center" click={handleModal} />
           {posts?.map((data) => {
             return(
           <FeedCard
@@ -48,6 +56,7 @@ export default function HomePage(user) {
           </Toaster>
         </div>
       </section>
+      {openModal && (<PostModal click={closeModal}/>)}
     </div>
   );
 }

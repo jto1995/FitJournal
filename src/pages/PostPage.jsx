@@ -3,6 +3,7 @@ import PostForm from "../Components/PostForm";
 import WorkoutLog from "../Components/WorkoutLog";
 import FoodLog from "../Components/FoodLog";
 import WeightLog from "../Components/WeightLog";
+import WorkoutLog2 from "../Components/WorkoutLog2";
 
 
 export default function PostPage() {
@@ -33,7 +34,7 @@ export default function PostPage() {
       </div>
         {showHide === "weight" && <WeightLog />}
         {showHide === "food" && <FoodLog />}
-        {showHide === "exercise" && <WorkoutLog />}
+        {showHide === "exercise" && <WorkoutLog2 />}
       </div>
     </div>
   );

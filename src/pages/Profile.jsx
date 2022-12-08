@@ -5,7 +5,7 @@ export default function Profile(userInfo) {
   return (
     <div>
       <section className="bg-gradient-to-r from-green-100 to-sky-300 h-screen">
-        <div className="flex flex-col justify-center align-center pt-4 mb-6 ml-50">
+        <div className="flex flex-col justify-center items-center pt-4 mb-6 ml-50">
           <img className="rounded-full h-20 w-20" src={ProfilePic} alt="" />
           <p>{userInfo.name}Mohan Muruge</p>
         </div>

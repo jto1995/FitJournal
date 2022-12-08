@@ -15,7 +15,7 @@ export default function WeightLog() {
     return shortString;
   }
 
-  const handleUserData = (chartData) =>
+  const handleUserData = (chartData) =>{
     setUserData({
       labels: chartData
         .sort((a, b) => b.value - a.value)
@@ -29,7 +29,7 @@ export default function WeightLog() {
           borderWidth: 2,
         },
       ],
-    });
+    })}
   const getData = () => {
     const jwtToken = sessionStorage.getItem("jwt_token");
     axios
