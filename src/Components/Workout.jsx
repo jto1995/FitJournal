@@ -1,17 +1,16 @@
-import React from 'react'
-import WorkoutCard from './WorkoutCard'
+import React from "react";
+import WorkoutCard from "./WorkoutCard";
 
 function Workout(workout) {
   return (
-    <div>
-        <div>
+    <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 min-h-screen">
+      <div>
         <h3>{workout.name}</h3>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
+      </div>
 
-        <WorkoutCard/>
+      <WorkoutCard />
     </div>
-  )
+  );
 }
 
-export default Workout
+export default Workout;

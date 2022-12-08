@@ -3,7 +3,7 @@ import FeedIcon from "../assets/Icons/feed.svg";
 import ProfileIcon from "../assets/Icons/profile.svg";
 import PostIcon from "../assets/Icons/post.svg";
 import GroupIcon from "../assets/Icons/groups.svg";
-import Logout from "../assets/Icons/power.png";
+
 export default function Nav(user) {
   return (
     <nav>

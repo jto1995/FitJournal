@@ -7,13 +7,19 @@ export default function WorkoutLog2() {
   const [openChest, setOpenChest] = useState(false);
   const [openBack, setOpenBack] = useState(false);
 
-  const handleLegsOpen = (e) => {
+  const handleLegsOpen = () => {
     setOpenLegs(true);
   };
-  const handleChestOpen = (e) => {
+  const handleLegsClose = () => {
+    setOpenLegs(false);
+  };
+  const handleChestOpen = () => {
     setOpenChest(true);
   };
-  const handleBackOpen = (e) => {
+  const handleChestClose = () => {
+    setOpenChest(false);
+  };
+  const handleBackOpen = () => {
     setOpenBack(true);
   };
 
@@ -79,7 +85,7 @@ export default function WorkoutLog2() {
           </div>
         </div>
       </div>
-{openLegs && (<Legs/>)}
+{openLegs && (<Legs close={handleLegsClose}/>)}
     </div>
   );
 }

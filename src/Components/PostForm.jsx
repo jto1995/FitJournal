@@ -1,4 +1,4 @@
-
+import WorkImg from '../assets/Icons/Workout.png'
 export default function PostForm(post) {
   
 
@@ -18,13 +18,9 @@ export default function PostForm(post) {
         <option value="food">Food Log</option>
         <option value="weight">Weight Log</option>
       </select>
+      {/* <div className='h-1/3'>
+        <img className='h-1/3 ' src={WorkImg} alt="" />
+      </div> */}
     </section>
   );
 }
-// Option 1
-// what are you submiting? food log, exercise, progress pic,
-
-// goes to next option
-
-//food log
-//

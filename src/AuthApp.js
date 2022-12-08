@@ -7,10 +7,7 @@ import Groups from "./pages/Groups";
 import HomePage from "./pages/HomePage";
 import Nav from "./Components/MobileNav";
 import axios from "axios";
-import PostModal from "./Components/PostModal";
-import WorkoutLog2 from "./Components/WorkoutLog2";
-import Legs from "./Components/Legs";
-import WorkoutCard from "./Components/WorkoutCard";
+import Workout from "./Components/Workout";
 
 export default function AuthApp() {
   const { user, logout } = useContext(AuthContext);
@@ -60,7 +57,7 @@ export default function AuthApp() {
           Groups
         </Route>
         <Route path="*" element={<HomePage/>}></Route>
-        <Route path="/legs" element={<WorkoutCard/>}></Route>
+        <Route path="/legs" element={<Workout/>}></Route>
       </Routes>
       <Nav logout={handleLogOut} />
     </>

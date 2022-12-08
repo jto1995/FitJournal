@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PostForm from "../Components/PostForm";
-import WorkoutLog from "../Components/WorkoutLog";
 import FoodLog from "../Components/FoodLog";
 import WeightLog from "../Components/WeightLog";
 import WorkoutLog2 from "../Components/WorkoutLog2";
