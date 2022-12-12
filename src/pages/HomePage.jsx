@@ -1,5 +1,5 @@
 import FeedCard from "../Components/FeedCard.jsx";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Btn from "../Components/Btn.jsx";
 import { useState } from "react";
@@ -10,6 +10,25 @@ export default function HomePage(user) {
   
   const [posts, setPosts] = useState();
   const [openModal, setOpenModal] = useState(false)
+
+  const handlePostSubmit = (e) => {
+    const jwtToken = sessionStorage.getItem("jwt_token");
+    e.preventDefault();
+    const newPost = {
+      post: e.target.post.value
+    }
+    axios
+    .post('http://localhost:8080/posts', newPost, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    } )
+    .then(() => {
+      setOpenModal(false)
+      getData();
+    })
+  }
+  
 
   const getData = () => {
     axios.get("http://localhost:8080/posts")
@@ -36,7 +55,7 @@ export default function HomePage(user) {
   return (
     <div>
       <section>
-        <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4 h-screen">
+        <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4 mb-10 min-h-screen">
           <p>Welcome Back</p>
           <h1 className="text-center text-2xl font-bold py-4">
             Community Feed
@@ -51,12 +70,9 @@ export default function HomePage(user) {
             post={data.post}
             likes={data.likes}
           />)})}
-          <Toaster position="bottom-center" reverseOrder={false}>
-            Hello
-          </Toaster>
         </div>
       </section>
-      {openModal && (<PostModal click={closeModal}/>)}
+      {openModal && (<PostModal click={closeModal} handleSubmit={handlePostSubmit}/>)}
     </div>
   );
 }

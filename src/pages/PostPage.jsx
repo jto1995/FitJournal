@@ -2,19 +2,12 @@ import { useState } from "react";
 import PostForm from "../Components/PostForm";
 import FoodLog from "../Components/FoodLog";
 import WeightLog from "../Components/WeightLog";
-import WorkoutLog2 from "../Components/WorkoutLog2";
+import WorkoutLog from "../Components/WorkoutLog";
 
 
 export default function PostPage() {
   const [showHide, setShowHide] = useState("");
 
-  const handleShow = (e) => {
-    setShowHide(e.target.value);
-    if (e.target.value === "Weight Log") {
-    } else if (e.target.value === "Food Log") {
-    } else if (e.target.value === "Exercise Log") {
-    }
-  };
   const handleShowHide = (e) => {
     const getOption = e.target.value;
     setShowHide(getOption);
@@ -33,7 +26,7 @@ export default function PostPage() {
       </div>
         {showHide === "weight" && <WeightLog />}
         {showHide === "food" && <FoodLog />}
-        {showHide === "exercise" && <WorkoutLog2 />}
+        {showHide === "exercise" && <WorkoutLog />}
       </div>
     </div>
   );

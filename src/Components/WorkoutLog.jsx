@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Btn from "./Btn";
 import Legs from "./Legs";
+import TemplateCard from "./TemplateCard";
 
-export default function WorkoutLog2() {
+export default function WorkoutLog() {
   const [openLegs, setOpenLegs] = useState(false);
   const [openChest, setOpenChest] = useState(false);
   const [openBack, setOpenBack] = useState(false);
 
+  // handle open
   const handleLegsOpen = () => {
     setOpenLegs(true);
   };
@@ -22,6 +24,13 @@ export default function WorkoutLog2() {
   const handleBackOpen = () => {
     setOpenBack(true);
   };
+  const handleBackClose = () => {
+    setOpenBack(false);
+  };
+
+  
+
+
 
   return (
     <div className="min-h-screen p-4 rounded-xl">
@@ -46,18 +55,7 @@ export default function WorkoutLog2() {
           <h3 className="font-bold text-2xl">Example Templates</h3>
         </div>
         <div className="flex flex-col">
-          <div
-            onClick={handleLegsOpen}
-            className="min-w-full border-2 p-4 rounded-xl bg-stone-50"
-          >
-            <div className="flex justify-center mb-2 border-b-2 pb-2">
-              <h3 className="font-bold text-xl">Legs</h3>
-            </div>
-            <p>Squats</p>
-            <p>Leg Extentions</p>
-            <p>Flat Leg Raises</p>
-            <p>Standing Calf Raise</p>
-          </div>
+          <TemplateCard click={handleLegsOpen}/>
           <div
             onClick={handleChestOpen}
             className="min-w-1/2 border-2 p-4 my-8 rounded-xl bg-stone-50"
@@ -86,6 +84,8 @@ export default function WorkoutLog2() {
         </div>
       </div>
 {openLegs && (<Legs close={handleLegsClose}/>)}
+{openBack && (<></>)}
+{openChest && (<></>)}
     </div>
   );
 }

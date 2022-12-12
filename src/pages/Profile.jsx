@@ -13,13 +13,13 @@ export default function Profile(userInfo) {
           <ul className="flex justify-between my-5 bg-sky-800 lg:justify-evenly">
             {/* to filter what you're looking for */}
             <li className="bg-sky-400 p-3">
-              <Link>Nutrition History</Link>
+              <Link to='/coming-soon'>Nutrition History</Link>
             </li>
             <li className="bg-sky-400 p-3">
-              <Link>Workout History</Link>
+              <Link to='/coming-soon'>Workout History</Link>
             </li>
             <li className="bg-sky-400 p-3">
-              <Link>Friends List</Link>
+              <Link to='/coming-soon'>Friends List</Link>
             </li>
             {/* include some icons with these buttons */}
           </ul>

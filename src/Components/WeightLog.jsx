@@ -3,11 +3,11 @@ import Btn from "./Btn";
 import LineChart from "../charts/LineChart";
 import axios from "axios";
 import { useEffect } from "react";
-import { data } from "autoprefixer";
 
 export default function WeightLog() {
   const [userData, setUserData] = useState();
   const [weightInput, setWeightInput] = useState([{ weight: "" }]);
+  const api = 'http://localhost:8080'
 
   function formatDate(value) {
     const length = 10;
@@ -33,7 +33,7 @@ export default function WeightLog() {
   const getData = () => {
     const jwtToken = sessionStorage.getItem("jwt_token");
     axios
-      .get(`http://localhost:8080/user/weight/`, {
+      .get(`${api}/user/weight/`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -54,14 +54,14 @@ export default function WeightLog() {
     const weightPost = {
       weight: e.target.weight.value,
     };
-    console.log(weightPost);
     axios
-      .post(`http://localhost:8080/user/weight/`, weightPost, {
+      .post(`${api}/user/weight/`, weightPost, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
       })
-      .then(getData());
+      .then()
+      getData();
   };
 
   return (

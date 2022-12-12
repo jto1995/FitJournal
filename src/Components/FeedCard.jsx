@@ -9,8 +9,9 @@ export default function FeedCard(props) {
       <div className="px-4">
         <p>{props.post}</p>
       </div>
-      <div>
+      <div className=" p-4 flex justify-between ">
         <p>{props.likes}❤️</p>
+        <p>🗑️</p>
       </div>
     </section>
   );

@@ -15,12 +15,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const handleChangePassword = (e) => setPassword(e.target.value);
+  const api = 'http://localhost:8080'
+
   const notify = () => toast(`Invalid Login Information 😢`)
 
   const handleLogin = (e) => {
     e.preventDefault();
     axios
-      .post(`http://localhost:8080/user/login`, {
+      .post(`${api}/user/login`, {
         email: e.target.email.value,
         password: e.target.password.value,
       })
@@ -41,7 +43,7 @@ export default function Login() {
 
   const loadProfile = (jwtToken) => {
     axios
-    .get(`http://localhost:8080/user`, {
+    .get(`${api}/user`, {
       headers: {
         Authorization: `Bearer ${jwtToken}`
       },

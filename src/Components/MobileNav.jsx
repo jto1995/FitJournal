@@ -3,7 +3,7 @@ import FeedIcon from "../assets/Icons/feed.svg";
 import ProfileIcon from "../assets/Icons/profile.svg";
 import PostIcon from "../assets/Icons/post.svg";
 import GroupIcon from "../assets/Icons/groups.svg";
-
+import Logout from "../assets/Icons/power.png";
 export default function Nav(user) {
   return (
     <nav>
@@ -27,6 +27,11 @@ export default function Nav(user) {
           <Link to={`/profile/${user.id}`}>
             <img className="w-10" src={ProfileIcon} alt="" />
           </Link>
+        </li>
+        <li>
+          <button onClick={user.logout}>
+            <img className="w-9 h-10" src={Logout} alt="" />
+          </button>
         </li>
       </ul>
     </nav>

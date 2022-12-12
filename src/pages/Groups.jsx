@@ -6,7 +6,7 @@ export default function Groups () {
     <section>
         <div className="bg-gradient-to-r from-green-100 to-sky-300 pt-3 h-screen">
             <div className="flex justify-center text-xl font-bold">
-            <h2>Groups Page</h2>
+            <h2>Groups Page --- COMING SOON</h2>
             </div>
         <GroupCard/>
         </div>
