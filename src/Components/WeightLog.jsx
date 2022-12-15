@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Btn from "./Btn";
 import LineChart from "../charts/LineChart";
 import axios from "axios";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function WeightLog() {
+  
   const [userData, setUserData] = useState();
-  const [weightInput, setWeightInput] = useState([{ weight: "" }]);
+
   const api = 'http://localhost:8080'
 
   function formatDate(value) {
@@ -18,7 +19,7 @@ export default function WeightLog() {
   const handleUserData = (chartData) =>{
     setUserData({
       labels: chartData
-        .sort((a, b) => b.value - a.value)
+        .sort(function(a, b){return a-b})
         ?.map((data) => formatDate(data.created_at)),
       datasets: [
         {
@@ -30,22 +31,24 @@ export default function WeightLog() {
         },
       ],
     })}
+    
   const getData = () => {
     const jwtToken = sessionStorage.getItem("jwt_token");
     axios
-      .get(`${api}/user/weight/`, {
+      .get(`${api}/weight/`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
       })
       .then((response) => {
         handleUserData(response.data);
+        console.log(response.data)
       });
   };
 
   useEffect(() => {
     getData();
-  }, );
+  }, []);
 
 
   const handleWeightSubmit = (e) => {
@@ -55,7 +58,7 @@ export default function WeightLog() {
       weight: e.target.weight.value,
     };
     axios
-      .post(`${api}/user/weight/`, weightPost, {
+      .post(`${api}/weight/`, weightPost, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
         },
@@ -65,27 +68,25 @@ export default function WeightLog() {
   };
 
   return (
-    <div className="flex flex-col justify-center justify-evenly sm:flex-row">
+    <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 min-h-screen">
+    <div className="flex flex-col justify-center justify-evenly p-4">
       <div className="sm:flex">
+        <Link to='/post'>⬅️</Link>
         <form className="flex flex-col sm:" onSubmit={handleWeightSubmit}>
           <h2 className="mb-4 text-2xl font-bold">Weight Log</h2>
-          {weightInput?.map((input, index) => {
-            return (
               <input
                 className="py-1 pl-2 mb-6 italic rounded-xl"
                 type="number"
-                key={input.weight}
                 name="weight"
                 placeholder="Weight in lbs"
               />
-            );
-          })}
           <Btn btnText="Submit" />
         </form>
         <div className="my-4 sm:w-2/3">
           {userData !== undefined ? <LineChart chartData={userData} /> : null}
         </div>
       </div>
+    </div>
     </div>
   );
 }

@@ -1,17 +1,40 @@
 import ProfilePic from "../assets/images/pic.jpg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default function Profile(userInfo) {
+export default function Profile() {
+
+  const [userInfo, setUserInfo] = useState();
+  
+  const params = useParams();
+  const api = 'http://localhost:8080'
+
+  const getData = () => {
+    axios
+      .get(`${api}/user/${params.id}`)
+      .then((response) => {
+      setUserInfo(response.data)
+      })
+    };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+
   return (
     <div>
       <section className="bg-gradient-to-r from-green-100 to-sky-300 h-screen">
-        <div className="flex flex-col justify-center items-center pt-4 mb-6 ml-50">
+        {userInfo?.map((user, i)=> {
+          return(
+        <div key={i} className="flex flex-col justify-center items-center pt-4 mb-6 ml-50">
           <img className="rounded-full h-20 w-20" src={ProfilePic} alt="" />
-          <p>{userInfo.name}Mohan Muruge</p>
+          <p>{user.name}</p>
         </div>
+        )})}
         <nav>
           <ul className="flex justify-between my-5 bg-sky-800 lg:justify-evenly">
-            {/* to filter what you're looking for */}
             <li className="bg-sky-400 p-3">
               <Link to='/coming-soon'>Nutrition History</Link>
             </li>
@@ -21,7 +44,6 @@ export default function Profile(userInfo) {
             <li className="bg-sky-400 p-3">
               <Link to='/coming-soon'>Friends List</Link>
             </li>
-            {/* include some icons with these buttons */}
           </ul>
         </nav>
         <div className="flex flex-col p-6 bg-slate-100 m-6 rounded-xl">

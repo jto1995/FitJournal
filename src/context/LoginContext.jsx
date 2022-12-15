@@ -1,21 +1,20 @@
 import {  useState, useEffect } from "react";
 import AuthContext from './authContext'
-import axios from "axios";
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState({ name: '', auth:false});
-    
+
+    const [user, setUser] = useState({ auth:false});
+
     const login = () =>{
-    setUser((user) => ({
-        name:"",
+    setUser(() => ({
         auth:true,
     }))
 }
+
 useEffect(() => {
     const jwtToken = sessionStorage.getItem('jwt_token');
     if (jwtToken) {
-      setUser((user) => ({
-        name: "",
+      setUser(() => ({
         auth: true,
       }))
     }
@@ -23,8 +22,7 @@ useEffect(() => {
   
 
     const logout = () => {
-        setUser((user) => ({
-            name: '',
+        setUser(() => ({
             auth:false,
         }))
     }

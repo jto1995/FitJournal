@@ -1,38 +1,91 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import Btn from "./Btn";
-import Legs from "./Legs";
 import TemplateCard from "./TemplateCard";
+import WorkoutModal from "./WorkoutModal";
+import { Link } from "react-router-dom";
 
-export default function WorkoutLog() {
+export default function WorkoutLog({}) {
   const [openLegs, setOpenLegs] = useState(false);
   const [openChest, setOpenChest] = useState(false);
   const [openBack, setOpenBack] = useState(false);
+  const [template, setTemplate] = useState();
+  const [userWorkout, setUserWorkout] = useState();
+  const [userModal, setUserModal] = useState(false)
+
+  const api = "http://localhost:8080";
 
   // handle open
   const handleLegsOpen = () => {
     setOpenLegs(true);
   };
-  const handleLegsClose = () => {
-    setOpenLegs(false);
-  };
+
   const handleChestOpen = () => {
     setOpenChest(true);
   };
-  const handleChestClose = () => {
-    setOpenChest(false);
-  };
+
   const handleBackOpen = () => {
     setOpenBack(true);
   };
-  const handleBackClose = () => {
+
+  const handleUserModal = () => {
+    setUserModal(true)
+  }
+  // handle close
+  const handleClose = () => {
+    setOpenLegs(false);
+    setOpenChest(false);
     setOpenBack(false);
+    setUserModal(false);
+
+  };
+  //Get Workout Templates
+  const getData = () => {
+    axios.get(`${api}/workout/template`).then((response) => {
+      setTemplate(response.data);
+      console.log(response.data)
+    });
   };
 
-  
+  // Load Workout Templates
+  useEffect(() => {
+    getData();
+  }, []);
 
+  // Filter Workout Templates
+  const filteredLegWorkout = template?.filter((temp) => {
+    return temp.workout_name === "Legs";
+  });
 
+  const filteredChestWorkout = template?.filter((temp) => {
+    return temp.workout_name === "Chest";
+  });
+
+  const filteredBackWorkout = template?.filter((temp) => {
+    return temp.workout_name === "Back";
+  });
+
+  // get User Workout Templates
+  const getUserWorkout = () => {
+    const jwtToken = sessionStorage.getItem("jwt_token");
+    axios
+      .get(`${api}/workout`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      })
+      .then((response) => {
+        setUserWorkout(response.data);
+      });
+  };
+
+  useEffect(() => {
+    getUserWorkout();
+  }, []);
 
   return (
+    <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 min-h-screen">
+      <Link to='/post'>⬅️</Link>
     <div className="min-h-screen p-4 rounded-xl">
       <h1 className="font-bold text-2xl mb-6">Start Workout</h1>
       <div className="mb-2">
@@ -44,48 +97,70 @@ export default function WorkoutLog() {
       <div>
         <div className="flex justify-between border-b-2 pb-4">
           <h3 className="mt-3 font-bold text-lg">Templates</h3>
-          <Btn btnText="+ Template" />
+          <Link to='/add-workout'><p>+ Template</p></Link>
         </div>
-        <div className="flex justify-center border-2 w-1/2 h-1/2 mb-8 mt-4 rounded-xl bg-stone-50">
-          <p className="p-10"> + Tap to add New Template</p>
+        <div className="flex justify-evenly overflow-auto">
+          <div className="flex justify-center border-2 w-2/5 h-1/2 ml-20 mb-8 mt-4 mr-2 rounded-xl bg-stone-50">
+            <p className="p-10"> + Tap to add New Template</p>
+          </div>
+          {userWorkout?.map((work) => {
+            return(
+          <div onClick={handleUserModal} className="flex justify-center border-2 mx-2 w-2/5 h-1/2 mb-8 mt-4 rounded-xl bg-stone-50">
+            <p className="p-16 font-bold italic">{work.workout_name}</p>
+          </div>
+          )})}
         </div>
       </div>
       <div>
         <div className="mb-4 border-t-2 pt-4">
           <h3 className="font-bold text-2xl">Example Templates</h3>
         </div>
-        <div className="flex flex-col">
-          <TemplateCard click={handleLegsOpen}/>
-          <div
-            onClick={handleChestOpen}
-            className="min-w-1/2 border-2 p-4 my-8 rounded-xl bg-stone-50"
-          >
-            <div className="flex justify-center mb-2 border-b-2 pb-2">
-              <h3 className="font-bold text-xl">Chest & Triceps</h3>
-            </div>
-            <p>Bench Press</p>
-            <p>Incline Bench</p>
-            <p>Military Press</p>
-            <p>Lateral Raise</p>
-            <p>Skull Crushers</p>
-          </div>
-          <div
-            onClick={handleBackOpen}
-            className="min-w-1/2 border-2 p-4 mb-20 rounded-xl bg-stone-50"
-          >
-            <div className="flex justify-center mb-2 border-b-2 pb-2">
-              <h3 className="font-bold text-xl">Back & Biceps</h3>
-            </div>
-            <p>Deadlifts</p>
-            <p>Seated Rows</p>
-            <p>Lat Pulldowns</p>
-            <p>Bicep Curls</p>
-          </div>
+        <div className="flex flex-col mb-10">
+          <TemplateCard
+            click={handleLegsOpen}
+            title="Legs"
+            filteredWorkout={filteredLegWorkout}
+          />
+          <TemplateCard
+            click={handleChestOpen}
+            title="Chest & Triceps"
+            filteredWorkout={filteredChestWorkout}
+          />
+          <TemplateCard
+            click={handleBackOpen}
+            title="Back & Biceps"
+            filteredWorkout={filteredBackWorkout}
+          />
         </div>
       </div>
-{openLegs && (<Legs close={handleLegsClose}/>)}
-{openBack && (<></>)}
-{openChest && (<></>)}
+      {openLegs && (
+        <WorkoutModal
+          close={handleClose}
+          title="Legs"
+          filteredWorkout={filteredLegWorkout}
+        />
+      )}
+      {openBack && (
+        <WorkoutModal
+          close={handleClose}
+          title="Back"
+          filteredWorkout={filteredBackWorkout}
+        />
+      )}
+      {openChest && (
+        <WorkoutModal
+          close={handleClose}
+          title="Chest"
+          filteredWorkout={filteredChestWorkout}
+        />
+      )}
+      {userModal && (
+        <WorkoutModal
+        close={handleClose}
+        filteredWorkout={userWorkout}
+        />
+      )}
+    </div>
     </div>
   );
 }

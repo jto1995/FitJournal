@@ -1,16 +1,18 @@
 import FeedCard from "../Components/FeedCard.jsx";
-import { Toaster } from "react-hot-toast";
 import axios from "axios";
 import Btn from "../Components/Btn.jsx";
 import { useState } from "react";
 import { useEffect } from "react";
 import PostModal from "../Components/PostModal.jsx";
 
-export default function HomePage(user) {
+export default function HomePage() {
   
   const [posts, setPosts] = useState();
   const [openModal, setOpenModal] = useState(false)
+  const [userInfo, setUserInfo] = useState();
 
+  const api = 'http://localhost:8080'
+  
   const handlePostSubmit = (e) => {
     const jwtToken = sessionStorage.getItem("jwt_token");
     e.preventDefault();
@@ -18,7 +20,7 @@ export default function HomePage(user) {
       post: e.target.post.value
     }
     axios
-    .post('http://localhost:8080/posts', newPost, {
+    .post(`${api}/posts`, newPost, {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
@@ -29,7 +31,6 @@ export default function HomePage(user) {
     })
   }
   
-
   const getData = () => {
     axios.get("http://localhost:8080/posts")
     .then((response) => {
@@ -46,17 +47,36 @@ export default function HomePage(user) {
   const closeModal = () => {
     setOpenModal(false)
   }
-
   function formatDate(value) {
     const length = 10;
     const shortString = value.substring(0, length);
     return shortString;
   }
+
+  const getUser = () => {
+    const jwtToken = sessionStorage.getItem("jwt_token");
+    axios
+    .get(`${api}/user`, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`,
+          },
+    })
+    .then((response) => {
+        setUserInfo(response.data)
+    })
+}
+useEffect(() => {
+    getUser();
+},[]);
+
   return (
     <div>
       <section>
         <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4 mb-10 min-h-screen">
-          <p>Welcome Back</p>
+          {userInfo?.map((users)=> {
+            return(
+            <p key={users.id}>Welcome Back {users.name}</p>
+          )})}
           <h1 className="text-center text-2xl font-bold py-4">
             Community Feed
           </h1>
