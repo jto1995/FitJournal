@@ -78,16 +78,16 @@ export default function SignUp() {
         <div className="flex justify-center">
           <form
             onSubmit={handleSubmit}
-            value={email}
-            onChange={handleChangeEmail}
             className="flex flex-col p-8 m-6 border-2 shadow-md bg-stone-100 rounded-xl w-80"
-          >
+            >
             <label className="pb-1 italic font-bold"> Email Address:</label>
             <input
               className="py-1 pl-2 mb-2 italic rounded-xl"
               id="email"
               type="email"
               placeholder="Email"
+              value={email}
+              onChange={handleChangeEmail}
             />
 
             <label className="pb-1 italic font-bold">Full Name: </label>

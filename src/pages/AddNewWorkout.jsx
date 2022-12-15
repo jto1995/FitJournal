@@ -45,7 +45,7 @@ export default function AddNewWorkout() {
         },
       })
       .then();
-    navigate("/post");
+    navigate("/post/workout");
   };
 
   return (

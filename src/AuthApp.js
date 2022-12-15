@@ -10,9 +10,9 @@ import axios from "axios";
 import Workout from "./Components/Workout";
 import ComingSoon from "./pages/ComingSoon";
 import AddNewWorkout from "./pages/AddNewWorkout";
-import FoodLog from "./Components/FoodLog";
-import WorkoutLog from "./Components/WorkoutLog";
-import WeightLog from "./Components/WeightLog";
+import FoodLog from "./pages/FoodLog";
+import WorkoutLog from "./pages/WorkoutLog";
+import WeightLog from "./pages/WeightLog";
 
 export default function AuthApp() {
   const { logout } = useContext(AuthContext);

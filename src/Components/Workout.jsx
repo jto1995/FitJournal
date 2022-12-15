@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import Btn from "./Btn";
 import WorkoutCard from "./WorkoutCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import Back from '../assets/Icons/back.png'
+
 
 export default function Workout() {
 
@@ -30,15 +32,16 @@ export default function Workout() {
 
   
   return (
-    <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 mb-16 min-h-screen ">
+    <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 mb-10 min-h-screen ">
       <div className="flex items-center justify-end">
-      <Btn click={handleClose} btnText='X' class='p-2'/>
+      <Link to='/post/workout'><img src={Back} className='w-10' alt="back" /></Link>
       </div>
       {workout?.map((work, index) => (
       <WorkoutCard 
       key={index}
       title={work.name}
-      id={work.id}
+      id={work.exercises_id}
+      workout_id={work.workouts_id}
       />
       ))}
     </div>

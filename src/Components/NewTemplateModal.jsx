@@ -1,6 +1,6 @@
 import React from 'react'
 
-function NewTemplateModal(template) {
+export default function NewTemplateModal(template) {
   return (
     <div onClick={template.click}>
         <form>
@@ -11,4 +11,3 @@ function NewTemplateModal(template) {
   )
 }
 
-export default NewTemplateModal

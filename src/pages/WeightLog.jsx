@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Btn from "./Btn";
+import Btn from "../Components/Btn";
 import LineChart from "../charts/LineChart";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Back from '../assets/Icons/back.png'
+
 
 export default function WeightLog() {
   
@@ -70,10 +72,12 @@ export default function WeightLog() {
   return (
     <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 min-h-screen">
     <div className="flex flex-col justify-center justify-evenly p-4">
-      <div className="sm:flex">
-        <Link to='/post'>⬅️</Link>
+      <div>
         <form className="flex flex-col sm:" onSubmit={handleWeightSubmit}>
+          <div className="flex justify-between mb-4">
           <h2 className="mb-4 text-2xl font-bold">Weight Log</h2>
+        <Link to='/post'><img src={Back} className='w-10 mb-4' alt="" /></Link>
+        </div>
               <input
                 className="py-1 pl-2 mb-6 italic rounded-xl"
                 type="number"
@@ -82,7 +86,7 @@ export default function WeightLog() {
               />
           <Btn btnText="Submit" />
         </form>
-        <div className="my-4 sm:w-2/3">
+        <div className="my-4">
           {userData !== undefined ? <LineChart chartData={userData} /> : null}
         </div>
       </div>

@@ -6,7 +6,6 @@ import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../context/authContext";
-import Back from '../assets/Icons/back.png'
 
 export default function Login() {
   const { login } = useContext(AuthContext);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Btn from "../Components/Btn";
+
 export default function SiteHome() {
   return (
     <div>

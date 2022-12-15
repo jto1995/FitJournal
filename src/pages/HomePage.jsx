@@ -26,6 +26,7 @@ export default function HomePage() {
       },
     } )
     .then(() => {
+      console.log(newPost)
       setOpenModal(false)
       getData();
     })
