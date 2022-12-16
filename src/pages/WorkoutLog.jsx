@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import Btn from "../Components/Btn";
 import TemplateCard from "../Components/TemplateCard";
 import WorkoutModal from "../Components/WorkoutModal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Back from "../assets/Icons/back.png";
 
-export default function WorkoutLog({}) {
+export default function WorkoutLog() {
   const [openLegs, setOpenLegs] = useState(false);
   const [openChest, setOpenChest] = useState(false);
   const [openBack, setOpenBack] = useState(false);
-  const [userModal, setUserModal] = useState(false);
   const [template, setTemplate] = useState();
   const [userWorkout, setUserWorkout] = useState();
 
+  const nav = useNavigate();
   const api = "http://localhost:8080";
 
   // handle open
@@ -29,21 +29,16 @@ export default function WorkoutLog({}) {
     setOpenBack(true);
   };
 
-  const handleUserModal = () => {
-    setUserModal(true);
-  };
   // handle close
   const handleClose = () => {
     setOpenLegs(false);
     setOpenChest(false);
     setOpenBack(false);
-    setUserModal(false);
   };
   //Get Workout Templates
   const getData = () => {
     axios.get(`${api}/workout/template`).then((response) => {
       setTemplate(response.data);
-      console.log(response.data);
     });
   };
 
@@ -76,8 +71,25 @@ export default function WorkoutLog({}) {
       })
       .then((response) => {
         setUserWorkout(response.data);
+        console.log(response.data)
       });
   };
+
+  const handleStartClick = (e) => {
+    e.preventDefault();
+    nav(`/workout/${e.target.value}`)
+
+  }
+
+  const handleHistoryClick = (e) => {
+    e.preventDefault();
+    nav('/workout/history')
+  }
+
+  const handleEditClick = (e) => {
+    e.preventDefault();
+    nav('/workout/edit')
+  }
 
   useEffect(() => {
     getUserWorkout();
@@ -95,8 +107,9 @@ export default function WorkoutLog({}) {
         <div className="my-6">
           <h3 className="italic font-bold text-2xl underline">Quick Start</h3>
         </div>
-        <div className="mb-6">
+        <div className="mb-6 flex justify-between">
           <Btn btnText="Start New Workout" class="w-100" />
+          <Btn btnText="View History" click={handleHistoryClick}/>
         </div>
         <div>
           <div className="flex justify-between border-b-2 pb-4">
@@ -108,11 +121,14 @@ export default function WorkoutLog({}) {
           <div className="flex justify-evenly overflow-auto">
             {userWorkout?.map((work) => {
               return (
-                <div
-                  onClick={handleUserModal}
-                  className="flex justify-center border-2 mx-2 min-w-1/4 h-1/2 mb-8 mt-4 rounded-xl bg-stone-50"
-                >
-                  <p className="p-16 font-bold italic">{work.workout_name}</p>
+                <div className="flex border-2 mx-2 min-w-1/4 h-1/2 mb-8 mt-4 rounded-xl bg-stone-50">
+                  <div className="flex flex-col pb-10 px-10 justify-between">
+                    <p className="font-bold pt-4 text-2xl italic text-center">{work.workout_name}</p>
+                    <div className="flex pt-10">
+                      <Btn btnText='Edit' class='mr-4' click={handleEditClick} value={work.id} id='start' name='start'/>
+                      <Btn btnText='Start' class='ml-4' click={handleStartClick} value={work.id}/>
+                    </div>
+                  </div>
                 </div>
               );
             })}
@@ -160,9 +176,6 @@ export default function WorkoutLog({}) {
             title="Chest"
             filteredWorkout={filteredChestWorkout}
           />
-        )}
-        {userModal && (
-          <WorkoutModal close={handleClose} filteredWorkout={userWorkout} />
         )}
       </div>
     </div>

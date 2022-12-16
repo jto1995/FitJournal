@@ -13,6 +13,7 @@ import AddNewWorkout from "./pages/AddNewWorkout";
 import FoodLog from "./pages/FoodLog";
 import WorkoutLog from "./pages/WorkoutLog";
 import WeightLog from "./pages/WeightLog";
+import WorkoutHistory from "./pages/WorkoutHistory";
 
 export default function AuthApp() {
   const { logout } = useContext(AuthContext);
@@ -56,6 +57,7 @@ export default function AuthApp() {
         <Route path="/profile/:id" element={<Profile />}></Route>
         <Route path="/groups" element={<Groups />}></Route>
         <Route path="/workout/:id" element={<Workout/>}></Route>
+        <Route path='/workout/history' element={<WorkoutHistory/>}></Route>
         <Route path="/add-workout/" element={<AddNewWorkout/>}></Route>
         <Route path="/groups/:groupsId" element={<Groups />}></Route>
         <Route path="/coming-soon" element={<ComingSoon />}></Route>

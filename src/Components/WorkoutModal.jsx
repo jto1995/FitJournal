@@ -19,7 +19,7 @@ export default function WorkoutModal({filteredWorkout, close, title}) {
         <div className='flex flex-col mb-8 italic'>
             <div>
                 {filteredWorkout?.map((data, i) => {
-                return <p key={i}>3 X {data.name}</p>
+                return <p key={i}>{data.name}</p>
             })}
             
             </div>

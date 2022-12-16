@@ -6,7 +6,7 @@ export default function Btn(Btn) {
       className={`bg-gradient-to-r from-zinc-200 to-stone-400 hover:bg-violet-600 p-3 text-lg rounded-xl font-medium ${Btn.class}`}
       value={Btn.value}
     >
-      <p>{Btn.btnText}</p>
+    {Btn.btnText}
     </button>
   );
 }
