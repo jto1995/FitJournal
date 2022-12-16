@@ -14,6 +14,7 @@ import FoodLog from "./pages/FoodLog";
 import WorkoutLog from "./pages/WorkoutLog";
 import WeightLog from "./pages/WeightLog";
 import WorkoutHistory from "./pages/WorkoutHistory";
+import EditWorkout from './pages/EditWorkout'
 
 export default function AuthApp() {
   const { logout } = useContext(AuthContext);
@@ -42,9 +43,15 @@ export default function AuthApp() {
       });
   };
 
+  const getExtras = () => {
+    const jwtToken = sessionStorage.getItem("jwt_token");
+    axios
+    .get(`${api}/`)
+  }
   useEffect(() => {
     getData();
   }, []);
+
 
   return (
     <>
@@ -57,6 +64,7 @@ export default function AuthApp() {
         <Route path="/profile/:id" element={<Profile />}></Route>
         <Route path="/groups" element={<Groups />}></Route>
         <Route path="/workout/:id" element={<Workout/>}></Route>
+        <Route path='workout/edit/:id' element={<EditWorkout/>}></Route>
         <Route path='/workout/history' element={<WorkoutHistory/>}></Route>
         <Route path="/add-workout/" element={<AddNewWorkout/>}></Route>
         <Route path="/groups/:groupsId" element={<Groups />}></Route>

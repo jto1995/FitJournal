@@ -3,22 +3,11 @@ import Btn from "./Btn";
 import { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-import ErrorMessage from "./ErrorMessage";
 
 export default function WorkoutCard({ title, id, workout_id }) {
   const api = "http://localhost:8080";
-  const [error, setError] = useState();
 
   const notify = () => toast(`Your log has been submitted`);
-
-  const handleError = (e) => {
-    if (e.target.value.length === 0) {
-      console.log(e.target.value);
-      setError(true);
-    } else {
-      setError(false);
-    }
-  };
 
   const handleExerciseSubmit = (e) => {
     const jwtToken = sessionStorage.getItem("jwt_token")
@@ -76,45 +65,35 @@ export default function WorkoutCard({ title, id, workout_id }) {
               <label htmlFor="set">Set</label>
               <input
                 type="number"
-                className={`py-1 pl-2 mb-6 italic w-1/2 rounded-xl shadow-2xl ${
-                  error === true ? "invalid" : null
-                }`}
+                className={`py-1 pl-2 mb-6 italic w-1/2 rounded-xl shadow-2xl`}
                 name="set"
                 defaultValue="1"
-                onChange={handleError}
               />
             </div>
             <div className="flex flex-col">
               <label htmlFor="reps">Reps</label>
               <input
                 type="number"
-                className={`py-1 pl-2 mb-6 italic w-2/3 rounded-xl shadow-2xl ${
-                  error === true ? "invalid" : null
-                }`}
+                className={`py-1 pl-2 mb-6 italic w-2/3 rounded-xl shadow-2xl`}
                 name="reps"
                 placeholder="Reps"
-                onChange={handleError}
               />
             </div>
             <div className="flex flex-col">
               <label htmlFor="reps">Weight</label>
               <input
                 type="number"
-                className={`py-1 pl-2 mb-6 italic w-2/3 rounded-xl shadow-2xl ${
-                  error === true ? "invalid" : null
-                }`}
+                className={`py-1 pl-2 mb-6 italic w-2/3 rounded-xl shadow-2xl `}
                 name="weight"
                 placeholder="Weight"
-                onChange={handleError}
               />
             </div>
           </div>
-          <ErrorMessage display={error} />
           <div className="flex justify-end mt-6">
             <Btn btnText="Submit" id="btn" value={id} />
           </div>
         </form>
-        <Toaster position="bottom-center" reverseOrder={false} />
+        <Toaster position="top-center" reverseOrder={true} />
       </div>
     </div>
   );

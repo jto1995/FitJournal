@@ -3,14 +3,12 @@ import Btn from "../Components/Btn";
 import LineChart from "../charts/LineChart";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Back from '../assets/Icons/back.png'
-
+import Back from "../assets/Icons/back.png";
 
 export default function WeightLog() {
-  
   const [userData, setUserData] = useState();
 
-  const api = 'http://localhost:8080'
+  const api = "http://localhost:8080";
 
   function formatDate(value) {
     const length = 10;
@@ -18,11 +16,17 @@ export default function WeightLog() {
     return shortString;
   }
 
-  const handleUserData = (chartData) =>{
+  const handleUserData = (chartData) => {
     setUserData({
       labels: chartData
-        .sort(function(a, b){return a-b})
-        ?.map((data) => formatDate(data.created_at)),
+        .sort((a, b) => {
+          if (a.created_at < b.created_at) {
+            return -1;
+          } else {
+            return 1;
+          }
+        })
+        .map((data) => formatDate(data.created_at)),
       datasets: [
         {
           label: "Weight",
@@ -32,8 +36,9 @@ export default function WeightLog() {
           borderWidth: 2,
         },
       ],
-    })}
-    
+    });
+  };
+
   const getData = () => {
     const jwtToken = sessionStorage.getItem("jwt_token");
     axios
@@ -44,14 +49,13 @@ export default function WeightLog() {
       })
       .then((response) => {
         handleUserData(response.data);
-        console.log(response.data)
+        console.log(response.data);
       });
   };
 
   useEffect(() => {
     getData();
   }, []);
-
 
   const handleWeightSubmit = (e) => {
     const jwtToken = sessionStorage.getItem("jwt_token");
@@ -65,32 +69,35 @@ export default function WeightLog() {
           Authorization: `Bearer ${jwtToken}`,
         },
       })
-      .then()
-      getData();
+      .then(() => {
+        getData();
+      });
   };
 
   return (
     <div className="p-4 bg-gradient-to-r from-green-100 to-sky-300 min-h-screen">
-    <div className="flex flex-col justify-center justify-evenly p-4">
-      <div>
-        <form className="flex flex-col sm:" onSubmit={handleWeightSubmit}>
-          <div className="flex justify-between mb-4">
-          <h2 className="mb-4 text-2xl font-bold">Weight Log</h2>
-        <Link to='/post'><img src={Back} className='w-10 mb-4' alt="" /></Link>
-        </div>
-              <input
-                className="py-1 pl-2 mb-6 italic rounded-xl"
-                type="number"
-                name="weight"
-                placeholder="Weight in lbs"
-              />
-          <Btn btnText="Submit" />
-        </form>
-        <div className="my-4">
-          {userData !== undefined ? <LineChart chartData={userData} /> : null}
+      <div className="flex flex-col justify-center justify-evenly p-4">
+        <div>
+          <form className="flex flex-col sm:" onSubmit={handleWeightSubmit}>
+            <div className="flex justify-between mb-4">
+              <h2 className="mb-4 text-2xl font-bold">Weight Log</h2>
+              <Link to="/post">
+                <img src={Back} className="w-10 mb-4" alt="" />
+              </Link>
+            </div>
+            <input
+              className="py-1 pl-2 mb-6 italic rounded-xl"
+              type="number"
+              name="weight"
+              placeholder="Weight in lbs"
+            />
+            <Btn btnText="Submit" />
+          </form>
+          <div className="my-4">
+            {userData !== undefined ? <LineChart chartData={userData} /> : null}
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

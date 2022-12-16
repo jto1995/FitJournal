@@ -14,16 +14,11 @@ export default function Workout() {
   const nav = useNavigate();
   const [workout, setWorkout] = useState();
   
-  const handleClose = (e) => {
-    e.preventDefault();
-    nav('/post')
-  }
   const getData = () => {
     axios
     .get(`${api}/workout/template/${params.id}`)
     .then((response) => {
       setWorkout(response.data)
-      console.log(response.data)
     })
   }
   useEffect(() => {

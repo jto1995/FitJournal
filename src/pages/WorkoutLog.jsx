@@ -88,7 +88,7 @@ export default function WorkoutLog() {
 
   const handleEditClick = (e) => {
     e.preventDefault();
-    nav('/workout/edit')
+    nav(`/workout/edit/${e.target.value}`)
   }
 
   useEffect(() => {
@@ -113,9 +113,9 @@ export default function WorkoutLog() {
         </div>
         <div>
           <div className="flex justify-between border-b-2 pb-4">
-            <h3 className="mt-3 font-bold text-lg">Templates</h3>
+            <h3 className="font-bold text-lg">Templates</h3>
             <Link to="/add-workout">
-              <p>+ Template</p>
+              <p className="font-bold">+ Template</p>
             </Link>
           </div>
           <div className="flex justify-evenly overflow-auto">
@@ -125,7 +125,7 @@ export default function WorkoutLog() {
                   <div className="flex flex-col pb-10 px-10 justify-between">
                     <p className="font-bold pt-4 text-2xl italic text-center">{work.workout_name}</p>
                     <div className="flex pt-10">
-                      <Btn btnText='Edit' class='mr-4' click={handleEditClick} value={work.id} id='start' name='start'/>
+                      <Btn btnText='Edit' class='mr-4' click={handleEditClick} value={work.id}/>
                       <Btn btnText='Start' class='ml-4' click={handleStartClick} value={work.id}/>
                     </div>
                   </div>

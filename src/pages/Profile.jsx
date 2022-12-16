@@ -61,7 +61,7 @@ export default function Profile() {
               <Link to="/coming-soon">Nutrition History</Link>
             </li>
             <li className="bg-sky-400 p-3">
-              <Link to="/workout-history">Workout History</Link>
+              <Link to="/workout/history">Workout History</Link>
             </li>
             <li className="bg-sky-400 p-3">
               <Link to="/coming-soon">Friends List</Link>

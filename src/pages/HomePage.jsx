@@ -49,7 +49,7 @@ export default function HomePage() {
     setOpenModal(false)
   }
   function formatDate(value) {
-    const length = 10;
+    const length = 16;
     const shortString = value.substring(0, length);
     return shortString;
   }
@@ -70,13 +70,15 @@ useEffect(() => {
     getUser();
 },[]);
 
+
+
   return (
     <div>
       <section>
         <div className="bg-gradient-to-r from-green-100 to-sky-300 p-4 mb-10 min-h-screen">
           {userInfo?.map((users)=> {
             return(
-            <p key={users.id}>Welcome Back {users.name}</p>
+            <p className="font-bold" key={users.id}>Welcome Back {users.name}!</p>
           )})}
           <h1 className="text-center text-2xl font-bold py-4">
             Community Feed
@@ -89,7 +91,6 @@ useEffect(() => {
             name={data.name}
             time={formatDate(data.created_at)}
             post={data.post}
-            likes={data.likes}
           />)})}
         </div>
       </section>

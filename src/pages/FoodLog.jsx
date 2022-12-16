@@ -34,7 +34,7 @@ export default function FoodLog() {
       <div className="flex flex-col my-4">
         <div className="flex flex-col mx-2 mt-2">
           <div className="flex justify-between justify-center items-center mb-4">
-          <h2 className="mb-2 font-bold">Food Log</h2>
+          <h2 className="mb-2 font-bold text-2xl">Food Log ---- Coming Soon</h2>
         <Link to='/post'><img src={Back} className='w-10 mb-4' alt="" /></Link>
         </div>
           <p className="mb-2 italic">
