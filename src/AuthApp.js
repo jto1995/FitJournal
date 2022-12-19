@@ -43,11 +43,6 @@ export default function AuthApp() {
       });
   };
 
-  const getExtras = () => {
-    const jwtToken = sessionStorage.getItem("jwt_token");
-    axios
-    .get(`${api}/`)
-  }
   useEffect(() => {
     getData();
   }, []);

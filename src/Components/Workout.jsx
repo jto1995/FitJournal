@@ -11,7 +11,6 @@ export default function Workout() {
 
   const params = useParams();
   const api = 'http://localhost:8080'
-  const nav = useNavigate();
   const [workout, setWorkout] = useState();
   
   const getData = () => {

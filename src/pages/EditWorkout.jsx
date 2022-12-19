@@ -6,9 +6,8 @@ import { useEffect } from "react";
 import Back from "../assets/Icons/back.png";
 import Btn from "../Components/Btn";
 
-export default function EditWorkout({workout_id}) {
+export default function EditWorkout() {
   const [workout, setWorkout] = useState();
-  const [id, setId] = useState();
   const api = "http://localhost:8080";
   const params = useParams();
 
@@ -48,17 +47,17 @@ export default function EditWorkout({workout_id}) {
         return (
           <div className="flex justify-between my-4 border-2 p-4 bg-slate-100 shadow-2xl rounded-2xl">
             <div className="flex flex-col justify-between">
-              <p className="font-bold text-2xl italic">{work.name}</p>
+              <p className="font-bold text-lg italic max-w-1/4">{work.name}</p>
               <p>{work.category}</p>
             </div>
             <div className="flex justify-end">
-              <Btn btnText="Delete Exercise" click={handleDelete} class="mr-4" value={work.id} />
+              <Btn btnText="Delete" click={handleDelete} class="mr-4" value={work.id} />
             </div>
           </div>
         );
     })}
 
-    <Btn btnText='Delete Template' click={deleteTemplate} value={workout_id}/>
+    <Btn btnText='Delete Template' click={deleteTemplate} />
     </div>
   );
 }

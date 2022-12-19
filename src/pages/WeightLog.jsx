@@ -49,7 +49,6 @@ export default function WeightLog() {
       })
       .then((response) => {
         handleUserData(response.data);
-        console.log(response.data);
       });
   };
 

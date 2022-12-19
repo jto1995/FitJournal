@@ -33,6 +33,7 @@ export default function Profile() {
     const shortString = value.substring(0, length);
     return shortString;
   }
+  
   const handleDelete = (e) => {
     e.preventDefault();
     console.log(e.target.value);
@@ -41,6 +42,7 @@ export default function Profile() {
       getPost();
     })
   };
+
   return (
     <div>
       <section className="bg-gradient-to-r from-green-100 to-sky-300 h-screen">
